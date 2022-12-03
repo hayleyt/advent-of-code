@@ -1,10 +1,11 @@
-// Run in the browser console of your puzzle input url
-// Fetch and format data
+/**
+ * Run in the browser console of your puzzle input url
+ */
+
 const response = await fetch("https://adventofcode.com/2022/day/1/input");
 const data = await response.text();
 const input = data.split(`\n`);
 
-// part 1
 let elfList = [];
 let calorieCount = 0;
 
@@ -18,19 +19,12 @@ input.forEach((num) => {
   }
 });
 
-// add last elf
 elfList.push(calorieCount);
 
-console.log("max: ", Math.max(...elfList));
+const topThree = elfList
+  .sort((a, b) => b - a)
+  .slice(0, 3)
+  .reduce((a, b) => a + b, 0);
 
-// part 2 - sort highest to lowest
-elfList.sort(function (a, b) {
-  return b - a;
-});
-
-const topThree = elfList.slice(0, 3);
-
-console.log(
-  "top 3: ",
-  topThree.reduce((a, b) => a + b, 0)
-);
+console.log("max calories: ", Math.max(...elfList));
+console.log("top three calories: ", topThree);
